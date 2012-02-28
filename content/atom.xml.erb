@@ -4,4 +4,9 @@ author_name: Gentoo Infrastructure Team
 author_uri: http://infra-status.gentoo.org/
 is_hidden: true
 ---
-<%= atom_feed(:content_proc => feed_proc, :articles => feed_articles) %>
+<%= begin
+		atom_feed(:content_proc => feed_proc, :articles => feed_articles)
+	rescue RuntimeError
+		""
+	end
+%>
