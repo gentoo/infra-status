@@ -1,0 +1,93 @@
+---
+title: Index
+---
+.container.bottomline
+  .row
+    .twelvecol.last
+      %h2 Service Availability Overview
+      %p
+        This data is aggregated from our automated service monitoring system as well as the outage and maintenance notices posted below.
+  .row
+    .fourcol
+      %h3 Community Services
+      %table.statustable
+        %tr.up
+          %td gentoo.org Website
+          %td.status
+            = service_icons 'www'
+        %tr
+          %td Forums
+          %td.status
+            = service_icons 'forums'
+        %tr
+          %td Wiki
+          %td.status
+            = service_icons 'wiki'
+        %tr
+          %td Planet Gentoo
+          %td.status
+            = service_icons 'planet'
+        %tr
+          %td Packages Database
+          %td.status
+            = service_icons 'pgo'
+        %tr
+          %td Mailing Lists
+          %td.status
+            = service_icons 'lists'
+        %tr.last
+          %td Mailing List Archives
+          %td.status
+            = service_icons 'archives'
+    .fourcol
+      %h3 Development Services
+      %table.statustable
+        %tr
+          %td cvs.gentoo.org
+          %td.status
+            = service_icons 'cvs'
+        %tr
+          %td Bugzilla
+          %td.status
+            = service_icons 'bugzilla'
+        %tr
+          %td Devmanual
+          %td.status
+            = service_icons 'devmanual'
+        %tr
+          %td Overlays
+          %td.status
+            = service_icons 'overlays'
+        %tr
+          %td tinderbox.dev.gentoo.org
+          %td.status
+            = service_icons 'tinderbox'
+        %tr.last
+          %td sources.gentoo.org
+          %td.status
+            = service_icons 'sources'
+    .fourcol.last
+      %h3 Developer Resources
+      %table.statustable
+        %tr
+          %td dev.gentoo.org shell access
+          %td.status
+            = service_icons 'dgo_ssh'
+        %tr
+          %td dev.gentoo.org web hosting
+          %td.status
+            = service_icons 'dgo_http'
+        %tr
+          %td In-/Outbound Email (SMTP)
+          %td.status
+            = service_icons 'dgo_smtp'
+        %tr.last
+          %td Mailbox access (POP/IMAP)
+          %td.status
+            = service_icons 'dgo_mbox'
+
+.container
+  .row
+    .twelvecol.last
+      %h2 Maintenance and Outage Notices
+  = notices

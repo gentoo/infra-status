@@ -1,0 +1,142 @@
+/* ============================== */
+/* ! Layout for desktop version   */
+/* ============================== */
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	padding-bottom: 3em;
+}
+
+a:link, a:visited {
+	color: #54487A;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.right {
+	float: right;
+}
+
+.header {
+	background-color: #E8E8E8;
+	border-top: 2px solid #54487A;
+	border-bottom: 1px solid #dcdcdc;
+}
+
+.header .row {
+	padding-top: .25em;
+	padding-bottom: .25em;
+}
+
+h1 {
+	font-size: 1.5em;
+}
+
+h2 {
+	font-size: 1.25em;
+}
+
+h3 {
+	font-size: 1.1em;
+	font-weight: 600;
+}
+
+.site-title {
+	background-color: #f5f5f5;
+	border-bottom: 1px solid #e8e8e8;
+	margin-bottom: 1em;
+}
+
+.site-title .row {
+	padding-top: .25em;
+	padding-bottom: .25em;
+}
+
+table.statustable {
+	width: 100%;
+	border-spacing: 0 2px;
+}
+
+table.statustable td {
+	padding-bottom: 1px;
+	border-bottom: 1px solid #e8e8e8;
+}
+
+table.statustable tr.last td {
+	border: none !important;
+}
+
+table.statustable td.status {
+	text-align: right;
+}
+
+table.statustable tr.down {
+	color: #a40000;
+}
+
+table.statustable tr.warning {
+	color: #ac4a00;
+}
+
+.grey {
+	background-color: #F5F5F5;
+}
+
+.bottomline {
+	border-bottom: 1px solid #e8e8e8;
+	padding-bottom: 1em;
+	margin-bottom: 1em;
+}
+
+p {
+	margin-top: .5em;
+	margin-bottom: .5em;
+}
+
+.post {
+	margin-top: .5em;
+	margin-bottom: .5em;
+	border-top: 1px solid #dcdcdc;
+}
+
+table.dates {
+	margin-left: 1em;
+	font-style: italic;
+}
+
+td {
+	padding-left: 0.25em;
+	padding-right: 0.25em;
+}
+
+#footer {
+	border-top: 1px solid #dcdcdc;
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	background-color: #E8E8E8;
+	padding-left: 0;
+	padding-right: 0;
+	padding-top: .5em;
+	padding-bottom: .5em;
+	font-size: .75em;
+}
+
+/* ============================= */
+/* ! Layout for mobile version   */
+/* ============================= */
+
+@media handheld, only screen and (max-width: 767px) {
+
+	body {
+		padding-bottom: 0;
+	}
+
+	#footer {
+	position: relative !important;
+	}
+
+}

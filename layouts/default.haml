@@ -1,0 +1,38 @@
+!!! 5
+%html
+  %head
+    %title Gentoo Linux Infrastructure status
+    %meta{ :charset => 'utf-8' }
+    %meta{ :name => 'viewport', :content => 'width=device-width, initial-scale=1.0' }
+    /[if lte IE 9]
+      %link{ :rel => 'stylesheet', :href => '/css/ie.css', :type => 'text/css', :media => 'screen' }
+    %link{ :rel => 'stylesheet', :href => '/css/1140.css', :type => 'text/css', :media => 'screen' }
+    %link{ :rel => 'stylesheet', :href => '/css/screen.css', :type => 'text/css', :media => 'screen' }
+    %link{ :rel => 'stylesheet', :href => 'http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic,600', :type => 'text/css' }
+    %link{ :rel => 'alternate', :href => '/atom.xml', :type => 'application/atom+xml', :title => 'Atom Feed' }
+    %script{ :src => '/js/css3-mediaqueries.js', :type => 'text/javascript'}
+  %body
+    .container.header
+      .row
+        .twelvecol.last
+          %img{ :src => '/img/site_logo.png', :alt => 'Gentoo Linux Infrastructure status' }
+    .container.site-title
+      .row
+        .twelvecol.last
+          %span.right
+            %a{ :href => '/atom.xml', :title => 'Subscribe to the Atom feed' }
+              %img{ :src => '/img/feed.png', :alt => 'Atom feed' }
+          %h1 Gentoo Linux Infrastructure Status
+
+    = yield
+    .container#footer
+      .row
+        .sixcol
+          Copyright &copy; Gentoo Foundation, Inc. &middot; Contents licensed under the CC-BY-SA 3.0  license
+        .sixcol.last
+          This site is powered by:
+          %a{ :href => 'http://nanoc.stoneship.org/'} nanoc
+          &middot;
+          %a{ :href => 'http://p.yusukekamiyamane.com/'} the Fugue iconset
+          &middot;
+          %a{ :href => 'http://cssgrid.net/' } the 1140 grid

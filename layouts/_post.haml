@@ -1,0 +1,21 @@
+.row.post
+  %h3
+    =item_icon(item[:type])
+    =item[:title]
+  .grey
+    %table.dates
+      %tr
+        %td Posted at
+        %td=item[:created_at]
+      - if item.attributes.has_key? :eta
+        %tr
+          %td Estimated time of recovery
+          %td=item[:eta]
+      - if is_expired? item
+        %tr{ :colspan => '2'}
+          %td
+            %img{ :src => base_url + 'img/information.png', :alt => 'information'}
+            This notice is
+            %strong expired.
+            The service has been restored.
+  ~ yield
