@@ -50,7 +50,7 @@ module HelperMethods
 end
 
 class ServiceRegistry
-	StatusSource = "/tmp/status.json"
+	StatusSource = File.join(File.dirname(__FILE__), "..", "status.json")
 
 	include Singleton
 	include HelperMethods
