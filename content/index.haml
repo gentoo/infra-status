@@ -95,3 +95,12 @@ title: Index
     .twelvecol.last
       %h2 Maintenance and Outage Notices
   = notices
+
+.container
+  .row
+    .eightcol
+    .fourcol.small.last
+      Last update:
+      = Time.now.rfc2822
+      <br />Data retrieved:
+      = to_date(ServiceRegistry.instance.status_data['generated'])

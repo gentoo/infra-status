@@ -44,6 +44,10 @@ h3 {
 	font-weight: 600;
 }
 
+.small {
+	font-size: 0.75em;
+}
+
 .site-title {
 	background-color: #f5f5f5;
 	border-bottom: 1px solid #e8e8e8;
