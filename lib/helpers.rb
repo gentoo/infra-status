@@ -134,3 +134,7 @@ end
 def base_url
 	@site.config[:base_url] + '/'
 end
+
+def to_date(str)
+	Time.parse(str).rfc2822
+end
