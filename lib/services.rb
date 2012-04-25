@@ -63,6 +63,16 @@ Services do
 		default 'motmot', 'http_sources'
 	end
 
+	service 'rsync' do
+		if host_flapping? 'albatross' or host_flapping? 'kookaburra'
+			State::WARNING
+		elsif host_up? 'albatross' and host_up? 'kookaburra'
+			State::UP
+		else
+			State::DOWN
+		end
+	end
+
 	service 'bugzilla' do
 		if service_flapping? 'yellowbishop', 'http_bugs' or service_flapping? 'yellowleg', 'http_bugs'
 			State::WARNING
