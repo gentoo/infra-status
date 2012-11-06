@@ -5,26 +5,34 @@ module HelperMethods
 	# Checks if all hosts are up
 	def all_hosts_up?(hosts)
 		hosts.each do |host|
-			return false unless status_data['hosts'][host]['current_state'] == 0
+			return false unless 
+				status_data['hosts'].has_key?(host) and 
+				status_data['hosts'][host]['current_state'] == 0
 		end
 
 		true
 	end
 
 	def host_up?(host)
+		status_data['hosts'].has_key?(host) and 
 		status_data['hosts'][host]['current_state'] == 0
 	end
 
 	def host_flapping?(host)
+		status_data['hosts'].has_key?(host) and 
 		status_data['hosts'][host]['is_flapping'] != 0
 	end
 
 	# Checks if the service is up
 	def service_up?(host, service)
+		status_data['services'].has_key?(host) and 
+		status_data['services'][host].has_key?(service) and 
 		status_data['services'][host][service]['current_state'] == 0
 	end
 
 	def service_flapping?(host, service)
+		status_data['services'].has_key?(host) and 
+		status_data['services'][host].has_key?(service) and 
 		status_data['services'][host][service]['is_flapping'] != 0
 	end
 
