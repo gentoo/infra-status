@@ -4,9 +4,9 @@
 
 Services do
 	service 'www' do
-		if service_flapping? 'ani', 'http_www' and service_flapping? 'auklet', 'http_www' and service_flapping? 'loon', 'http_www'
+		if service_flapping? 'avocet', 'http_www' and service_flapping? 'auklet', 'http_www'
 			State::WARNING
-		elsif service_up? 'ani', 'http_www' or service_up? 'auklet', 'http_www' or service_up? 'loon', 'http_www'
+		elsif service_up? 'avocet', 'http_www' or service_up? 'auklet', 'http_www'
 			State::UP
 		else
 			State::DOWN
@@ -28,15 +28,15 @@ Services do
 	end
 
 	service 'planet' do
-		default 'barbet', 'http_planet'
+		default 'brambling', 'http_planet'
 	end
 
 	service 'pgo' do
-		default 'barbet', 'http_packages'
+		default 'brambling', 'http_packages'
 	end
 
 	service 'lists' do
-		default 'pigeon'
+		default 'pigeon', 'smtp_lists'
 	end
 
 	service 'archives' do
@@ -48,7 +48,7 @@ Services do
 	end
 
 	service 'devmanual' do
-		default 'barbet', 'http_devmanual'
+		default 'brambling', 'http_devmanual'
 	end
 
 	service 'overlays' do
@@ -90,14 +90,14 @@ Services do
 	end
 	
 	service 'dgo_http' do
-		nil
+		default 'woodpecker', 'http_dev_ssl'
 	end
 
 	service 'dgo_smtp' do
-		nil
+		default 'woodpecker', 'smtp_dgo'
 	end
 
 	service 'dgo_mbox' do
-		nil
+		default 'woodpecker', 'imap_dgo'
 	end
 end
