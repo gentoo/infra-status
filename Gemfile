@@ -1,3 +1,7 @@
-source "http://rubygems.org"
+source 'http://rubygems.org'
 
-gem "sinatra"
+gem 'sinatra'
+gem 'sinatra-partial'
+gem 'json'
+gem 'redcarpet'
+gem 'thin'

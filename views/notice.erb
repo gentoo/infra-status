@@ -1,0 +1,16 @@
+<div class="panel <%= panel_class(notice) %>">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= item_icon notice['type']%> <a href="/notice/<%= h notice['id'] %>"><%= h notice['title'] %></a></h3>
+  </div>
+  <div class="panel-body">
+    <%= markdown notice.get_content %>
+  </div>
+  <div class="panel-footer">
+    <span class="pull-right">Posted at <em><%= date_format notice['created_at'] %></em></span>
+    <% if notice.has_key? 'eta' %>
+      <strong>Estimated time of service recovery: <em><%= date_format notice['eta'] %></em></strong>
+    <% else %>
+      <strong>No estimated time of service recovery available.</strong>
+    <% end %>
+  </div>
+</div>
