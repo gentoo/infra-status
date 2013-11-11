@@ -8,7 +8,7 @@ require_relative 'lib/notice_store'
 require_relative 'lib/service_registry'
 require_relative 'lib/helpers'
 
-MY_URL = 'http://localhost:4567/'
+MY_URL = 'http://infra-status.gentoo.org/'
 
 configure do
   NoticeStore.instance.update!
