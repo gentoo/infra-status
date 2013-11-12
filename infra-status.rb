@@ -40,9 +40,10 @@ end
 
 get '/feed.atom' do
   rss = RSS::Maker.make('atom') do |maker|
-    maker.channel.author = 'Gentoo Infrastructure Team'
-    maker.channel.title  = 'Gentoo Infrastructure Notices'
-    maker.channel.id     = MY_URL
+    maker.channel.author  = 'Gentoo Infrastructure Team'
+    maker.channel.title   = 'Gentoo Infrastructure Notices'
+    maker.channel.link    = MY_URL
+    maker.channel.id      = MY_URL
     maker.channel.updated = Time.now.to_s
 
     NoticeStore.instance.active_notices.each do |notice|
