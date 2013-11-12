@@ -23,8 +23,7 @@ class NoticeStore
       end
     end
 
-    # Name your stuff with YYYYMMDD-foo to get the newest notices on top
-    @notices.reverse!
+    @notices.sort! { |a, b| b['created_at'] <=> a['created_at'] }
 
     @load_date = DateTime.now
   end
