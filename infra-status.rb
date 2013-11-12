@@ -1,3 +1,7 @@
+# infra-status.gentoo.org
+# Alex Legler <a3li@gentoo.org>
+# AGPLv3
+
 require 'bundler/setup'
 require 'sinatra'
 require 'sinatra/partial'
