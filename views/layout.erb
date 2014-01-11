@@ -78,6 +78,8 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8">
+        Status data updated at <%= date_format ServiceRegistry.instance.load_date %>.<br />
+        Notices updated at <%= date_format NoticeStore.instance.load_date %>.<br />
         Fugue iconset by <a href="http://p.yusukekamiyamane.com/">Yusuke Kamiyamane</a>.
       </div>
       <div class="col-md-4">

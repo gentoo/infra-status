@@ -7,6 +7,7 @@ require 'singleton'
 class NoticeStore
   include Singleton
   CACHE_SECONDS = 600
+  attr_reader :load_date
 
   def initialize
     update!

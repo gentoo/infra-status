@@ -81,6 +81,10 @@ helpers do
   end
 
   def date_format(date)
-    date.rfc2822
+    if date.nil?
+      'n/a'
+    else
+      date.rfc2822
+    end
   end
 end

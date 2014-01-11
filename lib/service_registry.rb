@@ -71,6 +71,7 @@ class ServiceRegistry
 
   include Singleton
   include HelperMethods
+  attr_reader :load_date
 
   def initialize
   end
