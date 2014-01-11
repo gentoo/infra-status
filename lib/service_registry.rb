@@ -98,7 +98,7 @@ class ServiceRegistry
 
   private
   def update?
-    if ((DateTime.now - @load_date) * 60 * 60 * 24).to_i > CACHE_SECONDS
+    if not @load_date.nil? and ((DateTime.now - @load_date) * 60 * 60 * 24).to_i > CACHE_SECONDS
       update!
     end
   end
