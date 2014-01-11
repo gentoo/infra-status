@@ -74,6 +74,7 @@ class ServiceRegistry
   attr_reader :load_date
 
   def initialize
+    @cache_locked = false
   end
 
   def service(name, &block)
@@ -91,15 +92,17 @@ class ServiceRegistry
   end
 
   def update!
+    @cache_locked = true
     @services = {}
     @status_data = JSON.parse(File.read(StatusSource))
     load(File.join(File.dirname(__FILE__), '..', 'data', 'services.rb'))
     @load_date = DateTime.now
+    @cache_locked = false
   end
 
   private
   def update?
-    if not @load_date.nil? and ((DateTime.now - @load_date) * 60 * 60 * 24).to_i > CACHE_SECONDS
+    if not @load_date.nil? and not @cache_locked and ((DateTime.now - @load_date) * 60 * 60 * 24).to_i > CACHE_SECONDS
       update!
     end
   end
