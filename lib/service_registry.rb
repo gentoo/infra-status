@@ -65,11 +65,11 @@ module HelperMethods
 end
 
 class ServiceRegistry
+  CACHE_SECONDS = 600
   StatusSource = File.join(File.dirname(__FILE__), '..', 'data', 'status.json')
 
   include Singleton
   include HelperMethods
-  attr_reader :services, :status_data
 
   def initialize
   end
@@ -78,10 +78,28 @@ class ServiceRegistry
     @services[name] = block.call
   end
 
+  def services
+    update?
+    @services
+  end
+
+  def status_data
+    update?
+    @status_data
+  end
+
   def update!
     @services = {}
     @status_data = JSON.parse(File.read(StatusSource))
     load(File.join(File.dirname(__FILE__), '..', 'data', 'services.rb'))
+    @load_date = DateTime.now
+  end
+
+  private
+  def update?
+    if ((DateTime.now - @load_date) * 60 * 60 * 24).to_i > CACHE_SECONDS
+      update!
+    end
   end
 end
 
