@@ -1,5 +1,6 @@
 require 'singleton'
 require 'json'
+require 'date'
 
 # Defining state constants
 module State
