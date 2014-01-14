@@ -78,9 +78,14 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8">
-        Status data updated at <%= date_format ServiceRegistry.instance.load_date %>.<br />
-        Notices updated at <%= date_format NoticeStore.instance.load_date %>.<br />
-        Fugue iconset by <a href="http://p.yusukekamiyamane.com/">Yusuke Kamiyamane</a>.
+        <p>
+          Status data updated at <em><%= date_format ServiceRegistry.instance.load_date %>.</em><br />
+          Notices updated at <em><%= date_format NoticeStore.instance.load_date %>.</em><br />
+          Served by <em><%= Socket.gethostname == 'avocet' ? 'infra-status1' : 'infra-status2' %></em>
+        </p>
+        <p>
+          Fugue iconset by <a href="http://p.yusukekamiyamane.com/">Yusuke Kamiyamane</a>.
+        </p>
       </div>
       <div class="col-md-4">
         <strong>Questions or comments?</strong><br/>
@@ -89,7 +94,7 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <strong>&copy; 2001-2013 Gentoo Foundation, Inc.</strong><br/>
+        <strong>&copy; 2001-2014 Gentoo Foundation, Inc.</strong><br/>
         <small>
           Gentoo is a trademark of the Gentoo Foundation, Inc.
           The contents of this document, unless otherwise expressly stated, are licensed under the

@@ -7,6 +7,7 @@ require 'sinatra'
 require 'sinatra/partial'
 require 'redcarpet'
 require 'rss'
+require 'socket'
 
 require_relative 'lib/notice_store'
 require_relative 'lib/service_registry'
