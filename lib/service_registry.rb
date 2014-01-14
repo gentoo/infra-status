@@ -98,6 +98,10 @@ class ServiceRegistry
     load(File.join(File.dirname(__FILE__), '..', 'data', 'services.rb'))
     @load_date = DateTime.now
     @cache_locked = false
+  rescue Exception
+    @services = {}
+    @load_date = DateTime.new(2000, 1, 1)
+    @cache_locked = false
   end
 
   private
