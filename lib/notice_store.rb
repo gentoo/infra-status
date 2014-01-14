@@ -69,7 +69,10 @@ end
 class Notice
   def self.from_file(filename)
     content = File.read(filename)
-    new(File.basename(filename, '.txt'), YAML.load(content), content.split('---')[2].strip)
+    metadata = YAML.load(content) || {}
+    metadata['updated_at'] = File.mtime(filename)
+
+    new(File.basename(filename, '.txt'), metadata, content.split('---')[2].strip)
   end
 
   def [](what)

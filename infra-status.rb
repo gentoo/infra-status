@@ -50,7 +50,7 @@ get '/feed.atom' do
       maker.items.new_item do |item|
         item.link = MY_URL + 'notice/' + notice['id']
         item.title = notice['title']
-        item.updated = notice['created_at'].to_s
+        item.updated = notice['updated_at'].to_s
         item.description = markdown(notice.get_content)
       end
     end
