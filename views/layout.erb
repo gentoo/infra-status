@@ -81,7 +81,7 @@
         <p>
           Status data updated at <em><%= date_format ServiceRegistry.instance.load_date %>.</em><br />
           Notices updated at <em><%= date_format NoticeStore.instance.load_date %>.</em><br />
-          Served by <em><%= Socket.gethostname == 'avocet' ? 'infra-status1' : 'infra-status2' %></em>
+          Served by <em><%= Socket.gethostname == 'avocet' ? 'infra-status-web1' : 'infra-status-web2' %>.</em>
         </p>
         <p>
           Fugue iconset by <a href="http://p.yusukekamiyamane.com/">Yusuke Kamiyamane</a>.
