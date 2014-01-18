@@ -52,7 +52,7 @@ Services do
 	end
 
 	service 'overlays' do
-		default 'hornbill', 'http_overlays'
+		default 'spoonbill', 'http_overlays'
 	end
 	
 	service 'tinderbox' do
