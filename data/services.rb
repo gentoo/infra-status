@@ -48,7 +48,7 @@ Services do
 	end
 
 	service 'devmanual' do
-		default 'kookaburra', 'http_devmanual'
+		default 'brambling', 'http_devmanual'
 	end
 
 	service 'overlays' do
