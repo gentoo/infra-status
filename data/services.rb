@@ -64,9 +64,9 @@ Services do
 	end
 
 	service 'rsync' do
-		if host_flapping? 'albatross' or host_flapping? 'kookaburra'
+		if host_flapping? 'albatross' or host_flapping? 'dipper'
 			State::WARNING
-		elsif host_up? 'albatross' and host_up? 'kookaburra'
+		elsif host_up? 'albatross' and host_up? 'dipper'
 			State::UP
 		else
 			State::DOWN
