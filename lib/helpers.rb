@@ -20,7 +20,7 @@ helpers do
 
   def service_info(service)
     content = ''
-    active_notices = NoticeStore.instance.active_notices_for(service)
+    active_notices = NoticeStore.instance.visible_notices_for(service)
 
     unless (forced_state = get_forced_state(active_notices)) == nil
       content << status_icon(forced_state)
@@ -86,5 +86,14 @@ helpers do
     else
       date.rfc2822
     end
+  end
+
+  def humanize(secs)
+    [[60, :seconds], [60, :minutes], [24, :hours], [1000, :days]].map{ |count, name|
+      if secs > 0
+        secs, n = secs.divmod(count)
+        "#{n.to_i} #{name}" unless name == :seconds
+      end
+    }.compact.reverse.join(' ')
   end
 end

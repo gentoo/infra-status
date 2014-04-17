@@ -34,7 +34,7 @@ class NoticeStore
     @notices
   end
 
-  def active_notices
+  def visible_notices
     notices.select do |notice|
       is_active = notice['active']
       is_active &= notice['expire_at'] >= DateTime.now if notice.has_key? 'expire_at'
@@ -42,10 +42,28 @@ class NoticeStore
 
       is_active
     end
+
+  end
+
+  def active_notices
+    notices.select do |notice|
+      is_active = notice['active']
+      is_active &= notice['expire_at'] >= DateTime.now if notice.has_key? 'expire_at'
+      is_active &= notice['created_at'] <= DateTime.now if notice.has_key? 'created_at'
+      is_active &= notice['starts_at'] <= DateTime.now if notice.has_key? 'starts_at'
+
+      is_active
+    end
   end
 
   def active_notices_for(service)
     active_notices.select do |notice|
+      notice.has_key? 'affects' and notice['affects'].include? service
+    end
+  end
+
+  def visible_notices_for(service)
+    visible_notices.select do |notice|
       notice.has_key? 'affects' and notice['affects'].include? service
     end
   end
@@ -95,7 +113,7 @@ class Notice
   def initialize(id, metadata, content)
     @metadata = metadata
 
-    %w[created_at eta expire_at].each do |key|
+    %w[created_at eta expire_at starts_at].each do |key|
       @metadata[key] = DateTime.parse(@metadata[key]) if @metadata.has_key? key
     end
 
