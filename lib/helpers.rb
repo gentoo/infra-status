@@ -20,7 +20,7 @@ helpers do
 
   def service_info(service)
     content = ''
-    active_notices = NoticeStore.instance.visible_notices_for(service)
+    active_notices = NoticeStore.instance.active_notices_for(service)
 
     unless (forced_state = get_forced_state(active_notices)) == nil
       content << status_icon(forced_state)
