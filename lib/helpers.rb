@@ -21,6 +21,7 @@ helpers do
   def service_info(service)
     content = ''
     active_notices = NoticeStore.instance.active_notices_for(service)
+    visible_notices = NoticeStore.instance.visible_notices_for(service)
 
     unless (forced_state = get_forced_state(active_notices)) == nil
       content << status_icon(forced_state)
@@ -37,7 +38,7 @@ helpers do
       end
     end
 
-    content << '<span class="badge" style="margin-right: 1em;" title="There are notices (%s) below regarding this service.">%s</span>' % [active_notices.count, active_notices.count] if active_notices.count > 0
+    content << '<span class="badge" style="margin-right: 1em;" title="There are notices (%s) below regarding this service.">%s</span>' % [visible_notices.count, visible_notices.count] if visible_notices.count > 0
 
     content
   end
