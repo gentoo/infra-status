@@ -35,6 +35,7 @@ get '/notice/:id' do
       '<h1>No such notice</h1><p>The notice you have requested does not exist or has been removed as it was resolved long ago.</p>'
     end
   else
+    @title = notice['title']
     erb :notice, :locals => { :notice => notice }
   end
 end
