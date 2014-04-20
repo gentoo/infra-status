@@ -20,6 +20,7 @@ configure do
   ServiceRegistry.instance.update!
   set :partial_template_engine, :erb
   mime_type :atom, 'application/atom+xml'
+  set :bind, '0.0.0.0'
 end
 
 get '/' do

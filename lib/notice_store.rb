@@ -109,6 +109,10 @@ class Notice
     @content
   end
 
+  def url
+    MY_URL + 'notice/' + @metadata['id']
+  end
+
   private
   def initialize(id, metadata, content)
     @metadata = metadata

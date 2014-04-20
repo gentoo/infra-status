@@ -7,91 +7,18 @@
 <div class="row">
   <div class="col-lg-4">
     <h3>Community Services</h3>
-    <ul class="list-group">
-      <li class="list-group-item">
-        <%= service_info 'www' %>
-        gentoo.org Website
-      </li>
-      <li class="list-group-item">
-        <%= service_info 'forums' %>
-        Forums
-      </li>
-      <li class="list-group-item">
-        <%= service_info 'wiki' %>
-        Wiki
-      </li>
-      <li class="list-group-item">
-        <%= service_info 'planet' %>
-        Planet Gentoo
-      </li>
-      <li class="list-group-item">
-        <%= service_info 'pgo' %>
-        Package Database
-      </li>
-      <li class="list-group-item">
-        <%= service_info 'lists' %>
-        Mailing Lists
-      </li>
-      <li class="list-group-item">
-        <%= service_info 'archives' %>
-        Mailing List Archives
-      </li>
-    </ul>
+    <%= services_info %w[www forums wiki planet pgo lists archives] %>
   </div>
   <div class="col-lg-4">
     <h3>Development Services</h3>
-    <ul class="list-group">
-      <li class="list-group-item">
-        <%= service_info 'cvs' %>
-        CVS Server
-      </li>
-      <li class="list-group-item">
-        <%= service_info 'bugzilla' %>
-        Bugzilla
-      </li>
-      <li class="list-group-item">
-        <%= service_info 'rsync' %>
-        Master <tt>rsync</tt> Mirror
-      </li>
-      <li class="list-group-item">
-        <%= service_info 'devmanual' %>
-        Developer Manual
-      </li>
-      <li class="list-group-item">
-        <%= service_info 'overlays' %>
-        Overlays
-      </li>
-      <li class="list-group-item">
-        <%= service_info 'sources' %>
-        Source Code Browser
-      </li>
-    </ul>
+    <%= services_info %w[cvs bugzilla rsync devmanual overlays sources] %>
   </div>
   <div class="col-lg-4">
     <h3>Developer Resources</h3>
-    <ul class="list-group">
-      <li class="list-group-item">
-        <%= service_info 'dgo_ssh' %>
-        <tt>dev.gentoo.org</tt> Shell Access
-      </li>
-      <li class="list-group-item">
-        <%= service_info 'dgo_http' %>
-        <tt>dev.gentoo.org</tt> Web Hosting
-      </li>
-      <li class="list-group-item">
-        <%= service_info 'dgo_smtp' %>
-        In-/Outbound Email (SMTP)
-      </li>
-      <li class="list-group-item">
-        <%= service_info 'dgo_mbox' %>
-        Mailbox Access (POP/IMAP)
-      </li>
-    </ul>
+    <%= services_info %w[dgo_ssh dgo_http dgo_smtp dgo_mbox] %>
   </div>
-
 </div>
 
-
-<h2>Maintenance and Outage Notices</h2>
+<h2 id="notices">Maintenance and Outage Notices <small id="notices-for"></small></h2>
 
 <%= partial :notice, :collection => NoticeStore.instance.visible_notices %>

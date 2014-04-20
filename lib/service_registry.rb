@@ -75,10 +75,18 @@ class ServiceRegistry
 
   def initialize
     @cache_locked = false
+    @next_name = nil
+  end
+
+  def name(n)
+    @next_name = n
   end
 
   def service(name, &block)
-    @services[name] = block.call
+    @services[name] = {}
+    @services[name][:name] = @next_name || name
+    @services[name][:status] = block.call
+    @next_name = nil
   end
 
   def services

@@ -18,28 +18,46 @@ helpers do
     nil
   end
 
-  def service_info(service)
-    content = ''
-    active_notices = NoticeStore.instance.active_notices_for(service)
-    visible_notices = NoticeStore.instance.visible_notices_for(service)
+  def services_info(services)
+    content = '<div class="list-group">'
 
-    unless (forced_state = get_forced_state(active_notices)) == nil
-      content << status_icon(forced_state)
-    else
-      case ServiceRegistry.instance.services[service]
-        when State::UP
-          content << status_icon('up')
-        when State::WARNING
-          content << status_icon('warning')
-        when State::DOWN
-          content << status_icon('down')
-        else
-          content << status_icon('na')
-      end
+    services.each do |service|
+      content << "
+        <a class=\"list-group-item has-tooltip notice-link\" href=\"#notices\" title=\"#{status_text(service_status(service))}\"
+           data-toggle=\"tooltip\" data-placement=\"top\"
+           data-service=\"#{service}\" data-service-name=\"#{ServiceRegistry.instance.services[service][:name].gsub '"', "'"}\">
+        #{service_info service}
+        #{ServiceRegistry.instance.services[service][:name]}
+        </a>"
     end
 
-    content << '<span class="badge" style="margin-right: 1em;" title="There are notices (%s) below regarding this service.">%s</span>' % [visible_notices.count, visible_notices.count] if visible_notices.count > 0
+    content << '</div>'
+  end
 
+  def service_status(service)
+    active_notices = NoticeStore.instance.active_notices_for(service)
+
+    unless (forced_state = get_forced_state(active_notices)) == nil
+      return forced_state
+    else
+      case ServiceRegistry.instance.services[service][:status]
+        when State::UP
+          return 'up'
+        when State::WARNING
+          return 'warning'
+        when State::DOWN
+          return 'down'
+        else
+          return 'na'
+      end
+    end
+  end
+
+  def service_info(service)
+    visible_notices = NoticeStore.instance.visible_notices_for(service)
+
+    content = status_icon(service_status(service))
+    content << '<span class="badge" style="margin-right: 1em;" title="There are notices (%s) below regarding this service.">%s</span>' % [visible_notices.count, visible_notices.count] if visible_notices.count > 0
     content
   end
 
@@ -67,6 +85,21 @@ helpers do
         return '<img src="/icons/maintenance.png" alt="The service is undergoing scheduled maintenance." title="The service is undergoing scheduled maintenance." class="pull-right" />'
       else
         return '<img src="/icons/na.png" alt="No data available." title="No data available." class="pull-right" />'
+    end
+  end
+
+  def status_text(status)
+    case status.to_s
+      when 'up'
+        return 'The service is up and running.'
+      when 'down'
+        return 'There are indications the service is down.'
+      when 'warning'
+        return 'There are issues with the service.'
+      when 'maintenance'
+        return 'The service is undergoing scheduled maintenance.'
+      else
+        return 'No data available.'
     end
   end
 
