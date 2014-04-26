@@ -24,7 +24,7 @@ helpers do
     services.each do |service|
       content << "
         <a class=\"list-group-item has-tooltip notice-link\" href=\"#notices\" title=\"#{status_text(service_status(service))}\"
-           data-toggle=\"tooltip\" data-placement=\"top\"
+           data-toggle=\"tooltip\" data-placement=\"top\" data-container=\"body\"
            data-service=\"#{service}\" data-service-name=\"#{ServiceRegistry.instance.services[service][:name].gsub '"', "'"}\">
         #{service_info service}
         #{ServiceRegistry.instance.services[service][:name]}
