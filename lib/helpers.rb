@@ -35,6 +35,7 @@ helpers do
   end
 
   def service_status(service)
+    return 'na' unless ServiceRegistry.instance.services.has_key? service
     active_notices = NoticeStore.instance.active_notices_for(service)
 
     unless (forced_state = get_forced_state(active_notices)) == nil
