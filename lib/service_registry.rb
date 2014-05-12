@@ -7,6 +7,7 @@ module State
   UP=1
   DOWN=2
   WARNING=3
+  NA=0
 end
 
 module HelperMethods
@@ -44,6 +45,10 @@ module HelperMethods
         status_data['services'][host][service]['is_flapping'] != 0
   end
 
+  def has_service?(host, service)
+    status_data['services'][host].has_key?(service)
+  end
+
   def default(host, service = nil)
     if service == nil
       if host_flapping? host
@@ -54,6 +59,8 @@ module HelperMethods
         State::DOWN
       end
     else
+      return State::NA unless has_service? host, service
+
       if service_flapping? host, service
         State::WARNING
       elsif service_up? host, service
