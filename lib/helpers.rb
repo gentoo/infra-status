@@ -22,12 +22,15 @@ helpers do
     content = '<div class="list-group">'
 
     services.each do |service|
+      service_info_txt = service_info(service)
+      service_name = ServiceRegistry.instance.services[service][:name]
+      data_service_name = service_name.gsub('"', "'")
       content << "
         <a class=\"list-group-item has-tooltip notice-link\" href=\"#notices\" title=\"#{status_text(service_status(service))}\"
            data-toggle=\"tooltip\" data-placement=\"top\" data-container=\"body\"
-           data-service=\"#{service}\" data-service-name=\"#{ServiceRegistry.instance.services[service][:name].gsub '"', "'"}\">
-        #{service_info service}
-        #{ServiceRegistry.instance.services[service][:name]}
+           data-service=\"#{service}\" data-service-name=\"#{data_service_name}\">
+        #{service_info_txt}
+        #{service_name}
         </a>"
     end
 
