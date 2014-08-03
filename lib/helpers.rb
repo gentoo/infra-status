@@ -28,7 +28,7 @@ helpers do
       service_name = ServiceRegistry.instance.services[service][:name]
       data_service_name = service_name.gsub('"', "'")
       content << "
-        <a class=\"list-group-item has-tooltip notice-link\" href=\"#notices\" title=\"#{_status_text)}\"
+        <a class=\"list-group-item has-tooltip notice-link\" href=\"#notices\" title=\"#{_status_text}\"
            data-toggle=\"tooltip\" data-placement=\"top\" data-container=\"body\"
            data-service=\"#{service}\" data-service-name=\"#{data_service_name}\">
         #{_service_info}
