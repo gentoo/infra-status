@@ -89,8 +89,20 @@ class Notice
     content = File.read(filename)
     metadata = YAML.load(content) || {}
     metadata['updated_at'] = File.mtime(filename)
+    description = 'missing description'
+    description_splitpos = undef
 
-    new(File.basename(filename, '.txt'), metadata, content.split('---')[2].strip)
+    lines = content.split("\n").map { |l| l.strip }
+    if lines[0] == '---' and lines.grep('---').length() >= 2
+        description_splitpos = 2
+    elsif lines.grep('---').length() >= 1
+        description_splitpos = 1
+    else
+        description_splitpos = 0
+    end
+
+    description = content.split('---')[description_splitpos].strip
+    new(File.basename(filename, '.txt'), metadata, description)
   end
 
   def [](what)
