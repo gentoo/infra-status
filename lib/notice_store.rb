@@ -90,7 +90,7 @@ class Notice
     metadata = YAML.load(content) || {}
     metadata['updated_at'] = File.mtime(filename)
     description = 'missing description'
-    description_splitpos = undef
+    description_splitpos = nil
 
     lines = content.split("\n").map { |l| l.strip }
     if lines[0] == '---' and lines.grep('---').length() >= 2
