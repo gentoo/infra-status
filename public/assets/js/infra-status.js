@@ -38,10 +38,10 @@ jQuery(function($) {
 
             return false;
         } else {
-            var affected_notices = $("div.notice[data-services*=" + $(this).data('service') +"]");
+            var affected_notices = $("div.notice[data-services~='" + $(this).data('service') +"']");
 
             if (affected_notices.length > 0) {
-                $("div.notice:not([data-services*=" + $(this).data('service') +"])").hide(400);
+                $("div.notice:not([data-services~='" + $(this).data('service') +"'])").hide(400);
                 affected_notices.show(400);
                 $('#notices-for').html('for ' + $(this).data('service-name'));
                 $('a.notice-link.active').removeClass('active');
