@@ -19,8 +19,8 @@ class NoticeStore
     Dir.glob('data/notices/*.txt') do |file|
       begin
         @notices << Notice.from_file(file)
-      rescue ArgumentError
-        $stderr.puts 'Invalid notice: %s' % file
+      rescue => e
+        $stderr.puts 'Invalid notice (%s): %s' % [e.message, file]
       end
     end
 
