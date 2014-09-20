@@ -56,15 +56,19 @@ class NoticeStore
     end
   end
 
+  def notice_affects_service(notice, service)
+      return (notice.has_key? 'affects' and not notice['affects'].nil? and notice['affects'].include? service)
+  end
+
   def active_notices_for(service)
     active_notices.select do |notice|
-      notice.has_key? 'affects' and notice['affects'].include? service
+      notice_affects_service(notice, service)
     end
   end
 
   def visible_notices_for(service)
     visible_notices.select do |notice|
-      notice.has_key? 'affects' and notice['affects'].include? service
+      notice_affects_service(notice, service)
     end
   end
 
