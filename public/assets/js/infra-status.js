@@ -28,7 +28,6 @@ jQuery.fn.shake = function (steps, duration, amount, vertical) {
 
 jQuery(function($) {
     $('.has-tooltip').tooltip();
-    $('.share-btn').popover({html: true, placement: 'left', title: 'Share'});
 
     $('a.notice-link').click(function() {
         if ($(this).hasClass('active')) {
@@ -65,16 +64,4 @@ jQuery(function($) {
     });
 });
 
-InfraStatus = {
-    share: function(obj) {
-        var url = $(obj).parents('.notice').data('url');
-
-        if ($(obj).hasClass('btn-facebook')) {
-            window.open('https://www.facebook.com/sharer/sharer.php?u=' + url);
-        } else if ($(obj).hasClass('btn-google-plus')) {
-            window.open('https://plus.google.com/share?url=' + url);
-        } else if ($(obj).hasClass('btn-twitter')) {
-            window.open('https://twitter.com/home?status=' + url);
-        }
-    }
-};
+InfraStatus = {};
