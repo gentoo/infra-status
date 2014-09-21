@@ -127,7 +127,7 @@ helpers do
     if date.nil?
       'n/a'
     else
-      date.rfc2822
+      date.httpdate
     end
   end
 
