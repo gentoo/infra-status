@@ -83,6 +83,7 @@ class ServiceRegistry
   def initialize
     @cache_locked = false
     @next_name = nil
+    @current_category = nil
   end
 
   def name(n)
@@ -113,9 +114,32 @@ class ServiceRegistry
     @status_data
   end
 
+  def columns
+    update?
+    @columns
+  end
+
+  def categories
+    update?
+    @categories
+  end
+
+  def category(name, &block)
+    @categories[name] = {}
+    @current_category = name
+    @categories[name][:services] = block.call
+    @columns[@categories[name][:column]] << name
+  end
+
+  def column(id)
+    @categories[@current_category][:column] = id
+  end
+
   def update!
     @cache_locked = true
     @services = {}
+    @categories = {}
+    @columns = {1 => [], 2 => [], 3 => []}
     @status_data = JSON.parse(File.read(StatusSource))
     load(File.join(File.dirname(__FILE__), '..', 'data', 'services.rb'))
     @load_date = DateTime.now
@@ -123,6 +147,8 @@ class ServiceRegistry
   rescue Exception => e
     $stderr.puts e
     @services = {}
+    @categories = {}
+    @columns = {1 => [], 2 => [], 3 => []}
     @load_date = DateTime.new(2000, 1, 1)
     @cache_locked = false
   end

@@ -6,16 +6,13 @@
 
 <div class="row">
   <div class="col-lg-4">
-    <h3>Community Services</h3>
-    <%= services_info %w[www forums wiki planet pgo lists archives] %>
+    <%= render_column 1 %>
   </div>
   <div class="col-lg-4">
-    <h3>Development Services</h3>
-    <%= services_info %w[cvs bugzilla rsync devmanual overlays sources] %>
+    <%= render_column 2 %>
   </div>
   <div class="col-lg-4">
-    <h3>Developer Resources</h3>
-    <%= services_info %w[dgo_ssh dgo_http dgo_smtp dgo_mbox blogs] %>
+    <%= render_column 3 %>
   </div>
 </div>
 
