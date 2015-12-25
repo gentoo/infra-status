@@ -1,2 +1,5 @@
 .idea
 *.swp
+.bundle
+vendor
+thin.*
