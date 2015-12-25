@@ -48,13 +48,24 @@ Services do
 	end
 
 	name 'Mailing List Archives'
-	service 'archives' do # archives.gentoo.org
-		default 'finch'
+	service 'archives' do
+		default 'manakin', 'http_archives'
 	end
 
-	name 'CVS Server'
-	service 'cvs' do
+	name 'CVS and Git Repositories'
+	service 'vcs' do
 		default 'oystercatcher', 'ssh_cvs'
+	end
+
+	name 'Anonymous Repository Access'
+	service 'anonvcs' do
+		if service_flapping? 'manakin', 'http_anongit' or service_flapping? 'oystercatcher', 'http_anongit'
+			State::WARNING
+		elsif service_up? 'manakin', 'http_anongit' or service_up? 'oystercatcher', 'http_anongit'
+			State::UP
+		else
+			State::DOWN
+		end
 	end
 
 	name 'Developer Manual'
@@ -62,18 +73,18 @@ Services do
 		default 'brambling', 'http_devmanual'
 	end
 
-	name 'Overlays'
-	service 'overlays' do
-		default 'oystercatcher', 'http_overlays'
+	name 'Git Source Code Browser'
+	service 'gitweb' do
+		default 'manakin', 'http_gitweb'
 	end
 	
-	name 'Source Code Browser'
+	name 'CVS Source Code Browser'
 	service 'sources' do
 		default 'motmot', 'http_sources'
 	end
 
-	name 'Master <kbd>rsync</kbd> Mirror'
-	service 'rsync' do # master rsync
+	name 'rsync Mirrors'
+	service 'rsync' do
 		if host_flapping? 'albatross' or host_flapping? 'dipper'
 			State::WARNING
 		elsif host_up? 'albatross' and host_up? 'dipper'
@@ -83,17 +94,25 @@ Services do
 		end
 	end
 
-	name 'Bugzilla'
-	service 'bugzilla' do
-		if service_flapping? 'yellowbishop', 'http_bugs' or service_flapping? 'yellowleg', 'http_bugs'
+	name 'Distfile Mirrors'
+	service 'distfiles' do
+		if host_flapping? 'dipper'
 			State::WARNING
-		elsif service_up? 'yellowbishop', 'http_bugs' and service_up? 'yellowleg', 'http_bugs'
+		elsif host_up? 'dipper'
 			State::UP
-		elsif service_up? 'yellowbishop', 'http_bugs' or service_up? 'yellowleg', 'http_bugs'
-			State::WARNING
 		else
 			State::DOWN
 		end
+	end
+
+	name 'Bugzilla'
+	service 'bugzilla' do
+		default 'gannet', 'http_bugs'
+	end
+
+	name 'Project File Hosting'
+	service 'projects' do
+		default 'dipper', 'http_projects'
 	end
 
 	name '<kbd>dev.gentoo.org</kbd> Shell Access'
@@ -103,7 +122,7 @@ Services do
 	
 	name '<kbd>dev.gentoo.org</kbd> Web Hosting'
 	service 'dgo_http' do # dev.gentoo.org HTTP
-		default 'woodpecker', 'http_dev_ssl'
+		default 'woodpecker', 'http_dgo'
 	end
 
 	name 'In-/Outbound Email (SMTP)'
@@ -114,5 +133,35 @@ Services do
 	name 'Mailbox Access (POP/IMAP)'
 	service 'dgo_mbox' do # dev.gentoo.org IMAP/POP
 		default 'woodpecker', 'imap_dgo'
+	end
+
+	name 'Blog Hosting'
+	service 'blogs' do
+		default 'bittern', 'http_blogs'
+	end
+
+	category 'Community Services' do
+		column 1
+		%w[www forums wiki planet pgo lists archives]
+	end
+
+	category 'Development Services' do
+		column 2
+		%w[bugzilla devmanual projects]
+	end
+
+	category 'Code Repositories' do
+		column 2
+		%w[vcs anonvcs gitweb sources]
+	end
+
+	category 'Developer Resources' do
+		column 3
+		%w[dgo_ssh dgo_http dgo_smtp dgo_mbox blogs]
+	end
+
+	category 'Mirrors' do
+		column 3
+		%w[rsync distfiles]
 	end
 end
