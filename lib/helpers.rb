@@ -4,13 +4,13 @@ helpers do
   end
 
   def markdown(text)
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, :autolink => true, :space_after_headers => true)
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, space_after_headers: true)
     markdown.render(text)
   end
 
   def get_forced_state(notices)
     notices.each do |notice|
-      next unless notice.has_key? 'force_state'
+      next unless notice.key? 'force_state'
 
       return notice['force_state']
     end
@@ -38,7 +38,7 @@ helpers do
       _service_info = service_info(service)
       #service_name = ServiceRegistry.instance.services[service][:name]
       service_array = ServiceRegistry.instance.services[service]
-      service_name = service_array.nil? ? 'UNKNOWN NAME' : service_array[:name] 
+      service_name = service_array.nil? ? 'UNKNOWN NAME' : service_array[:name]
       data_service_name = service_name.gsub('"', "'")
       content << "
         <a class=\"list-group-item has-tooltip notice-link status-#{_service_status}\" href=\"#notices\" title=\"#{_status_text}\"
@@ -54,21 +54,21 @@ helpers do
   end
 
   def service_status(service)
-    return 'na' unless ServiceRegistry.instance.services.has_key? service
+    return 'na' unless ServiceRegistry.instance.services.key? service
     active_notices = NoticeStore.instance.active_notices_for(service)
 
     unless (forced_state = get_forced_state(active_notices)) == nil
       return forced_state
     else
       case ServiceRegistry.instance.services[service][:status]
-        when State::UP
-          return 'up'
-        when State::WARNING
-          return 'warning'
-        when State::DOWN
-          return 'down'
-        else
-          return 'na'
+      when State::UP
+        return 'up'
+      when State::WARNING
+        return 'warning'
+      when State::DOWN
+        return 'down'
+      else
+        return 'na'
       end
     end
   end
@@ -95,42 +95,42 @@ helpers do
 
   def status_icon(status)
     case status.to_s
-      when 'up'
-        return '<i class="status-icon fa fa-fw fa-check-square" title="The service is up and running"></i>'
-      when 'down'
-        return '<i class="status-icon fa fa-fw fa-times-circle" title="There are indications the service is down."></i>'
-      when 'warning'
-        return '<i class="status-icon fa fa-fw fa-warning" title="There are issues with the service."></i>'
-      when 'maintenance'
-        return '<i class="status-icon fa fa-fw fa-wrench" title="The service is undergoing scheduled maintenance."></i>'
-      else
-        return '<i class="status-icon fa fa-fw fa-question" title="No data available."></i>'
+    when 'up'
+      return '<i class="status-icon fa fa-fw fa-check-square" title="The service is up and running"></i>'
+    when 'down'
+      return '<i class="status-icon fa fa-fw fa-times-circle" title="There are indications the service is down."></i>'
+    when 'warning'
+      return '<i class="status-icon fa fa-fw fa-warning" title="There are issues with the service."></i>'
+    when 'maintenance'
+      return '<i class="status-icon fa fa-fw fa-wrench" title="The service is undergoing scheduled maintenance."></i>'
+    else
+      return '<i class="status-icon fa fa-fw fa-question" title="No data available."></i>'
     end
   end
 
   def status_text(status)
     case status.to_s
-      when 'up'
-        return 'The service is up and running.'
-      when 'down'
-        return 'There are indications the service is down.'
-      when 'warning'
-        return 'There are issues with the service.'
-      when 'maintenance'
-        return 'The service is undergoing scheduled maintenance.'
-      else
-        return 'No data available.'
+    when 'up'
+      return 'The service is up and running.'
+    when 'down'
+      return 'There are indications the service is down.'
+    when 'warning'
+      return 'There are issues with the service.'
+    when 'maintenance'
+      return 'The service is undergoing scheduled maintenance.'
+    else
+      return 'No data available.'
     end
   end
 
   def item_icon(type)
     case type.to_s
-      when 'maintenance'
-        return '<i class="fa fa-wrench"></i>'
-      when 'outage'
-        return '<i class="glyphicon glyphicon-fire"></i>'
-      when 'information'
-        return '<i class="fa fa-info-circle"></i>'
+    when 'maintenance'
+      return '<i class="fa fa-wrench"></i>'
+    when 'outage'
+      return '<i class="glyphicon glyphicon-fire"></i>'
+    when 'information'
+      return '<i class="fa fa-info-circle"></i>'
     end
   end
 
@@ -143,11 +143,11 @@ helpers do
   end
 
   def humanize(secs)
-    [[60, :seconds], [60, :minutes], [24, :hours], [1000, :days]].map{ |count, name|
+    [[60, :seconds], [60, :minutes], [24, :hours], [1000, :days]].map do |count, name|
       if secs > 0
         secs, n = secs.divmod(count)
         "#{n.to_i} #{name}" unless name == :seconds
       end
-    }.compact.reverse.join(' ')
+    end.compact.reverse.join(' ')
   end
 end

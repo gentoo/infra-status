@@ -37,27 +37,26 @@ class NoticeStore
   def visible_notices
     notices.select do |notice|
       is_active = notice['active']
-      is_active &= notice['expire_at'] >= DateTime.now if notice.has_key? 'expire_at'
-      is_active &= notice['created_at'] <= DateTime.now if notice.has_key? 'created_at'
+      is_active &= notice['expire_at'] >= DateTime.now if notice.key? 'expire_at'
+      is_active &= notice['created_at'] <= DateTime.now if notice.key? 'created_at'
 
       is_active
     end
-
   end
 
   def active_notices
     notices.select do |notice|
       is_active = notice['active']
-      is_active &= notice['expire_at'] >= DateTime.now if notice.has_key? 'expire_at'
-      is_active &= notice['created_at'] <= DateTime.now if notice.has_key? 'created_at'
-      is_active &= notice['starts_at'] <= DateTime.now if notice.has_key? 'starts_at'
+      is_active &= notice['expire_at'] >= DateTime.now if notice.key? 'expire_at'
+      is_active &= notice['created_at'] <= DateTime.now if notice.key? 'created_at'
+      is_active &= notice['starts_at'] <= DateTime.now if notice.key? 'starts_at'
 
       is_active
     end
   end
 
   def notice_affects_service(notice, service)
-      return (notice.has_key? 'affects' and not notice['affects'].nil? and notice['affects'].include? service)
+    notice.key?('affects') && !notice['affects'].nil? && notice['affects'].include?(service)
   end
 
   def active_notices_for(service)
@@ -81,6 +80,7 @@ class NoticeStore
   end
 
   private
+
   def update?
     if ((DateTime.now - @load_date) * 60 * 60 * 24).to_i > CACHE_SECONDS
       update!
@@ -89,6 +89,8 @@ class NoticeStore
 end
 
 class Notice
+  attr_reader :content
+
   def self.from_file(filename)
     content = File.read(filename)
     metadata = YAML.load(content) || {}
@@ -96,13 +98,13 @@ class Notice
     description = 'missing description'
     description_splitpos = nil
 
-    lines = content.split("\n").map { |l| l.strip }
-    if lines[0] == '---' and lines.grep('---').length() >= 2
-        description_splitpos = 2
-    elsif lines.grep('---').length() >= 1
-        description_splitpos = 1
+    lines = content.split("\n").map(&:strip)
+    if lines[0] == '---' && lines.grep('---').length >= 2
+      description_splitpos = 2
+    elsif lines.grep('---').length >= 1
+      description_splitpos = 1
     else
-        description_splitpos = 0
+      description_splitpos = 0
     end
 
     description = content.split('---')[description_splitpos].strip
@@ -110,19 +112,11 @@ class Notice
   end
 
   def [](what)
-    if @metadata.has_key? what
-      @metadata[what]
-    else
-      nil
-    end
+    @metadata[what]
   end
 
-  def has_key?(what)
-    @metadata.has_key? what
-  end
-
-  def get_content
-    @content
+  def key?(what)
+    @metadata.key? what
   end
 
   def url
@@ -130,11 +124,12 @@ class Notice
   end
 
   private
+
   def initialize(id, metadata, content)
     @metadata = metadata
 
-    %w[created_at eta expire_at starts_at].each do |key|
-      @metadata[key] = DateTime.parse(@metadata[key]) if @metadata.has_key? key
+    %w(created_at eta expire_at starts_at).each do |key|
+      @metadata[key] = DateTime.parse(@metadata[key]) if @metadata.key? key
     end
 
     @metadata['id'] = id

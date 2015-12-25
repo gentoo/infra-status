@@ -13,7 +13,7 @@ require_relative 'lib/notice_store'
 require_relative 'lib/service_registry'
 require_relative 'lib/helpers'
 
-MY_URL = 'http://infra-status.gentoo.org/'
+MY_URL = 'https://infra-status.gentoo.org/'
 
 configure do
   NoticeStore.instance.update!
@@ -32,12 +32,12 @@ get '/notice/:id' do
 
   if notice.nil?
     status 404
-    erb :layout, :layout => false do
+    erb :layout, layout: false do
       '<h1>No such notice</h1><p>The notice you have requested does not exist or has been removed as it was resolved long ago.</p>'
     end
   else
     @title = notice['title']
-    erb :notice, :locals => { :notice => notice }
+    erb :notice, locals: { notice: notice }
   end
 end
 
@@ -69,4 +69,3 @@ get '/force_update' do
   ServiceRegistry.instance.update!
   redirect '/#ok'
 end
-

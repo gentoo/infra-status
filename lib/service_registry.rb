@@ -4,10 +4,10 @@ require 'date'
 
 # Defining state constants
 module State
-  UP=1
-  DOWN=2
-  WARNING=3
-  NA=0
+  UP = 1
+  DOWN = 2
+  WARNING = 3
+  NA = 0
 end
 
 module HelperMethods
@@ -15,42 +15,42 @@ module HelperMethods
   def all_hosts_up?(hosts)
     hosts.each do |host|
       return false unless
-          status_data['hosts'].has_key?(host) and
-              status_data['hosts'][host]['current_state'] == 0
+          status_data['hosts'].key?(host) &&
+          status_data['hosts'][host]['current_state'] == 0
     end
 
     true
   end
 
   def host_up?(host)
-    status_data['hosts'].has_key?(host) and
-        status_data['hosts'][host]['current_state'] == 0
+    status_data['hosts'].key?(host) &&
+      status_data['hosts'][host]['current_state'] == 0
   end
 
   def host_flapping?(host)
-    status_data['hosts'].has_key?(host) and
-        status_data['hosts'][host]['is_flapping'] != 0
+    status_data['hosts'].key?(host) &&
+      status_data['hosts'][host]['is_flapping'] != 0
   end
 
   # Checks if the service is up
   def service_up?(host, service)
-    status_data['services'].has_key?(host) and
-        status_data['services'][host].has_key?(service) and
-        status_data['services'][host][service]['current_state'] == 0
+    status_data['services'].key?(host) &&
+      status_data['services'][host].key?(service) &&
+      status_data['services'][host][service]['current_state'] == 0
   end
 
   def service_flapping?(host, service)
-    status_data['services'].has_key?(host) and
-        status_data['services'][host].has_key?(service) and
-        status_data['services'][host][service]['is_flapping'] != 0
+    status_data['services'].key?(host) &&
+      status_data['services'][host].key?(service) &&
+      status_data['services'][host][service]['is_flapping'] != 0
   end
 
   def has_service?(host, service)
-    status_data['services'][host].has_key?(service)
+    status_data['services'][host].key?(service)
   end
 
   def default(host, service = nil)
-    if service == nil
+    if service.nil?
       if host_flapping? host
         State::WARNING
       elsif host_up? host
@@ -98,7 +98,7 @@ class ServiceRegistry
       @services[name][:status] = block.call
     rescue Exception => e
       @services[name][:status] = State::NA
-      $stderr.puts e
+      $stderr.puts "Processing #{name}: #{e}"
     end
 
     @next_name = nil
@@ -139,7 +139,7 @@ class ServiceRegistry
     @cache_locked = true
     @services = {}
     @categories = {}
-    @columns = {1 => [], 2 => [], 3 => []}
+    @columns = { 1 => [], 2 => [], 3 => [] }
     @status_data = JSON.parse(File.read(StatusSource))
     load(File.join(File.dirname(__FILE__), '..', 'data', 'services.rb'))
     @load_date = DateTime.now
@@ -154,8 +154,9 @@ class ServiceRegistry
   end
 
   private
+
   def update?
-    if not @load_date.nil? and not @cache_locked and ((DateTime.now - @load_date) * 60 * 60 * 24).to_i > CACHE_SECONDS
+    if !@load_date.nil? && !@cache_locked && ((DateTime.now - @load_date) * 60 * 60 * 24).to_i > CACHE_SECONDS
       update!
     end
   end
