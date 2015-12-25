@@ -3,7 +3,7 @@
     <h3 class="panel-title"><%= item_icon notice['type']%> <a href="/notice/<%= h notice['id'] %>"><%= h notice['title'] %></a></h3>
   </div>
   <div class="panel-body">
-    <%= markdown notice.get_content %>
+    <%= markdown notice.content %>
   </div>
   <div class="panel-footer">
     <div class="row">
@@ -11,7 +11,7 @@
         <span class="glyphicon glyphicon-send pull-left" title="Notice publication date"></span>
         <div style="margin-left: 1.25em"><em><%= date_format notice['created_at'] %></em></div>
       </div>
-      <% if notice.has_key? 'starts_at' %>
+      <% if notice.key? 'starts_at' %>
         <%- diff = ((DateTime.now - notice['starts_at']) * 24 * 60 * 60).to_i %>
         <div class="col-sm-4 has-tooltip" data-toggle="tooltip" data-placement="top"
         <% if diff < 0 %>
@@ -28,7 +28,7 @@
       <div class="col-sm-4 has-tooltip" data-toggle="tooltip" data-placement="top" title="Estimated time of service recovery">
         <span class="glyphicon glyphicon-ok pull-left" title="Estimated time of service recovery"></span>
         <div style="margin-left: 1.25em;">
-          <% if notice.has_key? 'eta' %>
+          <% if notice.key? 'eta' %>
             <em><%= date_format notice['eta'] %></em> (estimated)
           <% else %>
             No ETA for service recovery available.
