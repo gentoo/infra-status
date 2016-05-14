@@ -54,7 +54,7 @@ get '/feed.atom' do
         item.link = MY_URL + 'notice/' + notice['id']
         item.title = notice['title']
         item.updated = notice['updated_at'].to_s
-        item.description = markdown(notice.get_content)
+        item.description = markdown(notice.content)
       end
     end
   end
