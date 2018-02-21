@@ -1,0 +1,22 @@
+certificate version 0.1
+pusher 0x2F194D7405D6A10F 1519233541 -0100
+pushee git+ssh://git.gentoo.org/sites/infra-status.git
+nonce 1519233544-84f25f4dfbdf5eb3b2e6
+
+6799d9720d8bb60df6a95723f7ddd93552c45832 70a13ac938e69c970e91b8c688df8bcde3e4640d refs/heads/master
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEYXJSKHdwL7e5p9wHLxlNdAXWoQ8FAlqNqgUACgkQLxlNdAXW
+oQ8w6RAAtsOB2F6SyySiBVFFGT+m4sQho4ZacndsPBMTPI2YbtuXrWPbRLDQHEu6
+WxlrSerheXhmsOIOLEI4w+cU/Nm2Ihk2xsqwkOXRBfHetGewb9IMMaiTpUni34Xa
+CcoHHP7rQQ3e5A9Jv/sdLMg1sKv9P2tHA8Lhxuq/ieNaxVD1X9f7306JIJ7rrRXV
+HfACeG6HkuJ//lWshH8yG7glNIqFzBcNzJg0wG+9MnFzAPcgt7T2JQAB87KG+cv2
+5je0coVQjgmhlK1atyQxONRi4dxVcViMOizBUEke7pMMe52IKcLpbEwly3+TMcKQ
+AL/cTnFe2UFmlrU6d8mpOlWnwcH1RaTDeFypk604n9hLgCeo7oICORP+71q13tPr
+kygNinstPQpCly7OEJuHiIVa+9Fp88y5B78+/zMF+xzgshzl/7CsuWnDagy/CK8L
+Rkz6aGvXcevzpsPSUB/5h9TcH7sFQamjf8KnAjFTSChTb7RSXVg7J8DK37tsonIc
+bCjju661RaEF03XyuuSViiQRqdUrcyqq9np66sA7E2nYPomQClDEvW6Lqu1rf3I9
+hkpdMsQc+Zp4zqXMgZxyT2m7038a5i89sjcqmH2kksaYe214HrBlUkkjL0bYiHoG
+tKgNtLddxz1tIcim+TOgwrkiY1qQuZKFapDWOBk83eZUKKAaRZo=
+=Uvjb
+-----END PGP SIGNATURE-----
