@@ -5,7 +5,7 @@
 # IMPORTANT: Make your changes as well in monitoring:/etc/aggregate-icinga-data.conf
 
 Services do
-	name 'gentoo.org website'
+	name 'gentoo.org Website'
 	service 'www' do
 		if service_flapping? 'avocet', 'http_www' and service_flapping? 'auklet', 'http_www'
 			State::WARNING
@@ -34,30 +34,30 @@ Services do
 
 	name 'Planet Gentoo'
 	service 'planet' do
-		default 'kookaburra', 'http_planet'
+		default 'brambling', 'http_planet'
 	end
 
-	name 'Package database'
+	name 'Package Database'
 	service 'pgo' do
-		default 'brambling', 'http_packages'
+		default 'trogan', 'http_packages'
 	end
 
-	name 'Mailing lists'
+	name 'Mailing Lists'
 	service 'lists' do
 		default 'pigeon', 'smtp_lists'
 	end
 
-	name 'Mailing list archives'
+	name 'Mailing List Archives'
 	service 'archives' do
 		default 'manakin', 'http_archives'
 	end
 
-	name 'CVS and Git repositories'
+	name 'CVS and Git Repositories'
 	service 'vcs' do
 		default 'oystercatcher', 'ssh_cvs'
 	end
 
-	name 'Anonymous repository access'
+	name 'Anonymous Repository Access'
 	service 'anonvcs' do
 		if service_flapping? 'manakin', 'http_anongit' or service_flapping? 'oystercatcher', 'http_anongit'
 			State::WARNING
@@ -68,22 +68,22 @@ Services do
 		end
 	end
 
-	name 'Developer manual'
+	name 'Developer Manual'
 	service 'devmanual' do
 		default 'brambling', 'http_devmanual'
 	end
 
-	name 'Git source code browser'
+	name 'Git Source Code Browser'
 	service 'gitweb' do
 		default 'manakin', 'http_gitweb'
 	end
-	
-	name 'CVS source code browser'
+
+	name 'CVS Source Code Browser'
 	service 'sources' do
 		default 'motmot', 'http_sources'
 	end
 
-	name 'rsync mirrors'
+	name 'rsync Mirrors'
 	service 'rsync' do
 		if host_flapping? 'albatross' or host_flapping? 'dipper'
 			State::WARNING
@@ -94,7 +94,7 @@ Services do
 		end
 	end
 
-	name 'Distfile mirrors'
+	name 'Distfile Mirrors'
 	service 'distfiles' do
 		if host_flapping? 'dipper'
 			State::WARNING
@@ -110,52 +110,52 @@ Services do
 		default 'gannet', 'http_bugs'
 	end
 
-	name 'Project file hosting'
+	name 'Project File Hosting'
 	service 'projects' do
 		default 'dipper', 'http_projects'
 	end
 
-	name '<kbd>dev.gentoo.org</kbd> shell access'
+	name '<kbd>dev.gentoo.org</kbd> Shell Access'
 	service 'dgo_ssh' do # dev.gentoo.org SSH
 		default 'woodpecker', 'ssh_dgo'
 	end
-	
-	name '<kbd>dev.gentoo.org</kbd> web hosting'
+
+	name '<kbd>dev.gentoo.org</kbd> Web Hosting'
 	service 'dgo_http' do # dev.gentoo.org HTTP
 		default 'woodpecker', 'http_dgo'
 	end
 
-	name 'In-/Outbound email (SMTP)'
+	name 'In-/Outbound Email (SMTP)'
 	service 'dgo_smtp' do # dev.gentoo.org SMTP
 		default 'woodpecker', 'smtp_dgo'
 	end
 
-	name 'Mailbox access (POP/IMAP)'
+	name 'Mailbox Access (POP/IMAP)'
 	service 'dgo_mbox' do # dev.gentoo.org IMAP/POP
 		default 'woodpecker', 'imap_dgo'
 	end
 
-	name 'Blog hosting'
+	name 'Blog Hosting'
 	service 'blogs' do
 		default 'bittern', 'http_blogs'
 	end
 
-	category 'Community services' do
+	category 'Community Services' do
 		column 1
 		%w[www forums wiki planet pgo lists archives]
 	end
 
-	category 'Development services' do
+	category 'Development Services' do
 		column 2
 		%w[bugzilla devmanual projects]
 	end
 
-	category 'Code repositories' do
+	category 'Code Repositories' do
 		column 2
 		%w[vcs anonvcs gitweb sources]
 	end
 
-	category 'Developer resources' do
+	category 'Developer Resources' do
 		column 3
 		%w[dgo_ssh dgo_http dgo_smtp dgo_mbox blogs]
 	end
