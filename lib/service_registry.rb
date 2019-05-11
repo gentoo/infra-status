@@ -27,6 +27,11 @@ module HelperMethods
       status_data['hosts'][host]['current_state'] == 0
   end
 
+  def host_down?(host)
+    status_data['hosts'].key?(host) &&
+      status_data['hosts'][host]['current_state'] == 1
+  end
+
   def host_flapping?(host)
     status_data['hosts'].key?(host) &&
       status_data['hosts'][host]['is_flapping'] != 0
@@ -37,6 +42,12 @@ module HelperMethods
     status_data['services'].key?(host) &&
       status_data['services'][host].key?(service) &&
       status_data['services'][host][service]['current_state'] == 0
+  end
+
+  def service_down?(host, service)
+    status_data['services'].key?(host) &&
+      status_data['services'][host].key?(service) &&
+      status_data['services'][host][service]['current_state'] == 1
   end
 
   def service_flapping?(host, service)
