@@ -22,7 +22,7 @@ helpers do
     content = ''
 
     ServiceRegistry.instance.columns[id].each do |category|
-      content << "<h3>%s</h3>\n" % category
+      content << "<h3 class='mt-3'>%s</h3>\n" % category
       content << services_info(ServiceRegistry.instance.categories[category][:services])
     end
 
@@ -41,7 +41,7 @@ helpers do
       service_name = service_array.nil? ? 'UNKNOWN NAME' : service_array[:name]
       data_service_name = service_name.gsub('"', "'")
       content << "
-        <a class=\"list-group-item has-tooltip notice-link status-#{_service_status}\" href=\"#notices\" title=\"#{_status_text}\"
+        <a class=\"list-group-item list-group-item-action has-tooltip notice-link status-#{_service_status}\" href=\"#notices\" title=\"#{_status_text}\"
            data-toggle=\"tooltip\" data-placement=\"top\" data-container=\"body\"
            data-service=\"#{service}\" data-service-name=\"#{data_service_name}\">
 
@@ -83,13 +83,13 @@ helpers do
 
   def panel_class(notice)
     if notice['type'] == 'outage'
-      'panel-danger'
+      'border-danger'
     elsif notice['type'] == 'information'
-      'panel-info'
+      'border-info'
     elsif notice['type'] == 'maintenance'
-      'panel-warning'
+      'border-warning'
     else
-      'panel-default'
+      ''
     end
   end
 
@@ -128,7 +128,7 @@ helpers do
     when 'maintenance'
       return '<i class="fa fa-wrench"></i>'
     when 'outage'
-      return '<i class="glyphicon glyphicon-fire"></i>'
+      return '<i class="fa fa-fire" aria-hidden="true"></i>'
     when 'information'
       return '<i class="fa fa-info-circle"></i>'
     end
