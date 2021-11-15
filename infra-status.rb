@@ -24,6 +24,7 @@ configure do
 end
 
 get '/' do
+  last_modified ServiceRegistry.instance.load_date
   erb :index
 end
 
