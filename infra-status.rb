@@ -24,7 +24,7 @@ configure do
 end
 
 get '/' do
-  last_modified ServiceRegistry.instance.load_date
+  last_modified [ServiceRegistry.instance.load_date, NoticeStore.instance.load_date].max
   erb :index
 end
 
