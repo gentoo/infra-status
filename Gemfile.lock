@@ -11,7 +11,7 @@ GEM
     puma-daemon (0.1.2)
       puma (>= 5.0)
       rack
-    rack (2.0.5)
+    rack (2.2.6.4)
     rack-protection (2.0.3)
       rack
     redcarpet (3.4.0)
