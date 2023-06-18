@@ -16,6 +16,9 @@ GEM
     rack-protection (3.0.6)
       rack
     redcarpet (3.6.0)
+    rexml (3.2.5)
+    rss (0.2.9)
+      rexml
     ruby2_keywords (0.0.5)
     sinatra (3.0.6)
       mustermann (~> 3.0)
@@ -38,6 +41,7 @@ DEPENDENCIES
   puma
   puma-daemon
   redcarpet
+  rss
   sinatra
   sinatra-partial
   thin
